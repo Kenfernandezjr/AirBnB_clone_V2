@@ -1,7 +1,7 @@
 -- Set up MySQL server for testing
 -- This is basically the exact same thing as setup_mysql_dev.sql
 
-CREATE DATABASE IF NOT EXISTS hbnb_dev_db;
+CREATE DATABASE IF NOT EXISTS hbnb_test_db;
 USE hbnb_dev_db;
 CREATE USER IF NOT EXISTS 'hbnb_test'@'localhost';
 SET PASSWORD FOR 'hbnb_test'@'localhost' = 'hbnb_test_pwd';
