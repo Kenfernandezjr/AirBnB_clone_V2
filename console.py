@@ -43,6 +43,26 @@ class HBNBCommand(cmd.Cmd):
                 raise SyntaxError()
             my_list = line.split(" ")
             obj = eval("{}()".format(my_list[0]))
+            if len(my_list) > 1:
+                for x in range(1, len(my_list)):
+                    try:
+                        """
+                        For whatever reason, ints and floats are being saved to
+                        json as a string. They're being kept in single quotes
+                        """
+                        my_param = my_list[x].split("=")
+                        my_param[1] = my_param[1].replace("_", " ")
+                        print(my_param[1])
+                        if "\"" in my_param[1]:
+                            my_param[1] = my_param[1].replace("\"", "")
+                        elif "." in my_param[1]:
+                            float(my_param[1])
+                        else:
+                            int(my_param[1])
+                        setattr(obj, my_param[0], my_param[1])
+                    except:
+                        pass
+
             obj.save()
             print("{}".format(obj.id))
         except SyntaxError:
