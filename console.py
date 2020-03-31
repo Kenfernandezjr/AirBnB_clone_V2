@@ -52,7 +52,6 @@ class HBNBCommand(cmd.Cmd):
                         """
                         my_param = my_list[x].split("=")
                         my_param[1] = my_param[1].replace("_", " ")
-                        print(my_param[1])
                         if "\"" in my_param[1]:
                             my_param[1] = my_param[1].replace("\"", "")
                         elif "." in my_param[1]:
