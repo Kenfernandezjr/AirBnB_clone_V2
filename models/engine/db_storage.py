@@ -34,17 +34,17 @@ class DBStorage:
         holding None even if a class was passed in
         """
         object_list = []
-        print(cls)
+        """ print(cls) """
         if cls is not None:
-            print("Cls only")
+            """ print("Cls only") """
             object_list = self.__session.query(cls)
         else:
-            print("Everything!")
+            """ print("Everything!") """
             classes = [State, City, User, Place, Review, Amenity]
             for x in classes:
                 object_list += self.__session.query(x).all()
-                print(object_list)
-                print("")
+             """   print(object_list)
+                print("") """
 
         my_dict = {}
         for obj in object_list:
