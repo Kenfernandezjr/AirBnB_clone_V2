@@ -11,6 +11,7 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 from shlex import split
+from os import getenv
 
 
 class HBNBCommand(cmd.Cmd):
@@ -137,7 +138,21 @@ class HBNBCommand(cmd.Cmd):
         Exceptions:
             NameError: when there is no object taht has the name
         """
-        objects = storage.all()
+        # If we want to access the database storage using the given class
+        # passed in as line, string_to_class is necessary. Line is passed
+        # in as a string, and db_storage.all() requires a class object
+        # Without converting the string to class, db_storage.all() by default
+        # sets cls to None, and will attempt to query all classes
+        # On the other hand, if we want to access FileStorage, all of this is
+        # unnecessary and therefore will not be considered
+        string_to_class = {"State": State, "City": City, "User": User,
+                           "Place": Place, "Review": Review, "Amenity": Amenity}
+
+        if getenv('HBNB_TYPE_STORAGE') == 'db':
+            cls = string_to_class[line]
+            objects = storage.all(cls)
+        else:
+            objects = storage.all()
         my_list = []
         if not line:
             for key in objects:
@@ -266,7 +281,6 @@ class HBNBCommand(cmd.Cmd):
                     self.do_update(args)
         else:
             cmd.Cmd.default(self, line)
-
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
