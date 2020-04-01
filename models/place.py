@@ -6,6 +6,15 @@ from sqlalchemy.orm import relationship
 from os import getenv
 
 
+# metadata = MetaData()
+place_amenity = Table('amenity', Base.metadata,
+                      Column('place_id', String(60),
+                             ForeignKey('places.id'),
+                             primary_key=True, nullable=False),
+                      Column('amenity_id', String(60),
+                             ForeignKey('amenities.id'),
+                             primary_key=True, nullable=False))
+
 class Place(BaseModel, Base):
     """This is the class for Place
     Attributes:
@@ -38,6 +47,10 @@ class Place(BaseModel, Base):
 
     if getenv('HBNB_TYPE_STORAGE') == 'DBStorage':
         reviews = relationship('Review', backref='places')
+        amenities = relationship('Amenity', secondary=place_amenity,
+                                 viewonly=False)
 
     if getenv('HBNB_TYPE_STORAGE') == 'FileStorage':
         reviews = getattr(obj.place_id, 'self.id')
+        amenities = getattr(obj.amenity_ids, 'Amenity.id')
+        self.amenity_ids.append(obj.id)
