@@ -22,7 +22,8 @@ class DBStorage:
         db = getenv('HBNB_MYSQL_DB')
         env = getenv('HBNB_ENV')
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
-            format(user, passwd, host, db), pool_pre_ping=True)
+                                      format(user, passwd, host, db),
+                                      pool_pre_ping=True)
 
         Base.metadata.create_all(self.__engine)
         if env == 'test':
@@ -43,7 +44,7 @@ class DBStorage:
             classes = [State, City, User, Place, Review, Amenity]
             for x in classes:
                 object_list += self.__session.query(x).all()
-             """   print(object_list)
+                """   print(object_list)
                 print("") """
 
         my_dict = {}
@@ -65,7 +66,8 @@ class DBStorage:
 
     def reload(self):
         Base.metadata.create_all(self.__engine)
-        self.__session = sessionmaker(expire_on_commit=False, bind=self.__engine)
+        self.__session = sessionmaker(expire_on_commit=False,
+                                      bind=self.__engine)
         Session = scoped_session(self.__session)
         self.__session = Session()
 
