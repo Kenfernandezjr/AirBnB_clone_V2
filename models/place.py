@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This is the place class"""
 from models.base_model import BaseModel, Base
-from sqlalchemy import Table, Column, Integer, Float, ForeignKey
+from sqlalchemy import Table, Column, String, Integer, Float, ForeignKey
 
 
 class Place(BaseModel, Base):
@@ -19,17 +19,17 @@ class Place(BaseModel, Base):
         longitude: longitude in float
         amenity_ids: list of Amenity ids
     """
-    __tablename = 'places'
+    __tablename__ = 'places'
     city_id = Column(String(60), ForeignKey('cities.id'),
                      nullable=False)
     user_id = Column(String(60), ForeignKey('users.id'),
                      nullable=False)
-    name = Column(String(128), nullabe=False)
+    name = Column(String(128), nullable=False)
     description = Column(String(1024), nullable=True)
-    number_rooms = Column(Integer, nullable=False)
-    number_bathrooms = Column(Integer, nullable=False)
-    max_guest = Column(Integer, nullable=False)
-    price_by_night = Column(Integer, nullable=False)
-    latitude = Column(Float, nullable=True)
-    longitude = Column(Float, nullable=True)
+    number_rooms = Column(Integer, nullable=False, default=0)
+    number_bathrooms = Column(Integer, nullable=False, default=0)
+    max_guest = Column(Integer, nullable=False, default=0)
+    price_by_night = Column(Integer, nullable=False, default=0)
+    latitude = Column(Float, nullable=True, default=0)
+    longitude = Column(Float, nullable=True, default=0)
     amenity_ids = []

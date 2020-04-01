@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This is the user class"""
 from models.base_model import BaseModel, Base
-from sqlalchem2y import Column, String
+from sqlalchemy import Column, String
 from sqlalchemy.ext.declarative import declarative_base
 
 
