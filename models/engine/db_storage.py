@@ -45,7 +45,7 @@ class DBStorage:
             for x in classes:
                 object_list += self.__session.query(x).all()
                 # print(object_list)
-                # print("")
+                print("")
 
         my_dict = {}
         for obj in object_list:
