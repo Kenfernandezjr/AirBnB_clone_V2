@@ -53,5 +53,5 @@ class Place(BaseModel, Base):
 
     if getenv('HBNB_TYPE_STORAGE') == 'FileStorage':
         reviews = getattr(obj.place_id, 'self.id')
-        amenities = getattr(obj.amenity_ids, 'Amenity.id')
+        amenities = getattr(obj.amenity_ids, 'Amenity.id'),
         self.amenity_ids.append(obj.id)
