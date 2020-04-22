@@ -19,7 +19,7 @@ def hbnb():
 @app.route('/c/<text>')
 def c_is(txt):
     txt = txt.replace("_", " ")
-    return "C {}".format(text)
+    return "C {}".format(txt)
 
 
 if __name__ == "__main__":
